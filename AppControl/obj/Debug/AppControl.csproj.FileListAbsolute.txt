@@ -1,0 +1,15 @@
+D:\AppWindowsForms\AppControl\AppControl\bin\Debug\AppControl.exe.config
+D:\AppWindowsForms\AppControl\AppControl\bin\Debug\AppControl.exe
+D:\AppWindowsForms\AppControl\AppControl\bin\Debug\AppControl.pdb
+D:\AppWindowsForms\AppControl\AppControl\bin\Debug\FontAwesome.Sharp.dll
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.csproj.AssemblyReference.cache
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.Form1.resources
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.Properties.Resources.resources
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.csproj.GenerateResource.cache
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.csproj.CoreCompileInputs.cache
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.csproj.Up2Date
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.exe
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.pdb
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.Configuracion.resources
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.Conexion.resources
+D:\AppWindowsForms\AppControl\AppControl\obj\Debug\AppControl.Graficas.resources
