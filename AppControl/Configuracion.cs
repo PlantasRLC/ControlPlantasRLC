@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace AppControl
 {
@@ -25,6 +26,7 @@ namespace AppControl
 		}
 		
 		public float referencia =0;
+		public float referenciaCHART =0;
 		//public void button1_Click(object sender, EventArgs e)
 		//{
 		//	try
@@ -80,16 +82,8 @@ namespace AppControl
 					float k4 = float.Parse(textBoxk4.Text);
 					float P = float.Parse(textBoxp.Text);
 					float I = float.Parse(textBoxI.Text);
-					referencia = float.Parse(textBoxref.Text);
+					referencia = SeleccionUnidadesReferencia();
 					float dt = float.Parse(textBoxdt.Text);
-					//float k1 = float.Parse(textBoxk1.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float k2 = float.Parse(textBoxk2.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float k3 = float.Parse(textBoxk3.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float k4 = float.Parse(textBoxk4.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float P = float.Parse(textBoxp.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float I = float.Parse(textBoxI.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float referencia = float.Parse(textBoxref.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float dt = float.Parse(textBoxdt.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
 
 					// Parámetros Circuitales
 					float R1 = float.Parse(textBoxR1.Text);
@@ -100,14 +94,20 @@ namespace AppControl
 					float L2 = float.Parse(textBoxL2.Text);
 					float C1 = float.Parse(textBoxC1.Text);
 					float C2 = float.Parse(textBoxC2.Text);
-					//float R1 = float.Parse(textBoxR1.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float R2 = float.Parse(textBoxR2.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float R3 = float.Parse(textBoxR3.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float R4 = float.Parse(textBoxR4.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float L1 = float.Parse(textBoxL1.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float L2 = float.Parse(textBoxL2.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float C1 = float.Parse(textBoxC1.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
-					//float C2 = float.Parse(textBoxC2.Text.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+
+					//Variable PAra Chart
+					if (comboBoxEstadoControlado.Text.Contains("i"))
+					{
+						referenciaCHART = referencia * 1000;
+					}
+					else if (comboBoxEstadoControlado.Text.Contains("V"))
+					{
+						referenciaCHART = referencia;
+					}
+					else
+					{
+						referenciaCHART = 0;
+					}
 
 
 					// Formatear los floats a 6 decimales
@@ -171,8 +171,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO I-V
 					textBoxk1.Enabled  = true;
 					textBoxk2.Enabled  = true;
-					textBoxk3.Enabled  = true;
-					textBoxk4.Enabled  = true;
+					textBoxk3.Enabled  = false;
+					textBoxk4.Enabled  = false;
 					textBoxp.Enabled   = true;
 					textBoxI.Enabled   = true;
 					textBoxref.Enabled = true;
@@ -196,8 +196,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO I-VI
 					textBoxk1.Enabled  = true;
 					textBoxk2.Enabled  = true;
-					textBoxk3.Enabled  = true;
-					textBoxk4.Enabled  = true;
+					textBoxk3.Enabled  = false;
+					textBoxk4.Enabled  = false;
 					textBoxp.Enabled   = true;
 					textBoxI.Enabled   = true;
 					textBoxref.Enabled = true;
@@ -222,7 +222,7 @@ namespace AppControl
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
 					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -246,8 +246,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO II-V
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
-					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk3.Enabled = false;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -271,8 +271,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO II-VI
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
-					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk3.Enabled = false;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -297,7 +297,7 @@ namespace AppControl
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
 					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -321,8 +321,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO III-V
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
-					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk3.Enabled = false;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -372,7 +372,7 @@ namespace AppControl
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
 					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -397,7 +397,7 @@ namespace AppControl
 					textBoxk1.Enabled = true;
 					textBoxk2.Enabled = true;
 					textBoxk3.Enabled = true;
-					textBoxk4.Enabled = true;
+					textBoxk4.Enabled = false;
 					textBoxp.Enabled = true;
 					textBoxI.Enabled = true;
 					textBoxref.Enabled = true;
@@ -421,8 +421,8 @@ namespace AppControl
 					// Condiciones para CIRCUITO IV-VI
 					textBoxk1.Enabled  = true;
 					textBoxk2.Enabled  = true;
-					textBoxk3.Enabled = true;
-					textBoxk4.Enabled  = true;
+					textBoxk3.Enabled = false;
+					textBoxk4.Enabled  = false;
 					textBoxp.Enabled   = true;
 					textBoxI.Enabled   = true;
 					textBoxref.Enabled = true;
@@ -487,6 +487,38 @@ namespace AppControl
 		private void comboBoxEstadoControlado_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			comboBoxEstadoControlado.Text = comboBoxEstadoControlado.SelectedItem.ToString();
+			referencia = SeleccionUnidadesReferencia();
 		}
+
+		private float SeleccionUnidadesReferencia()
+		{
+			float Referencia = 0; // Inicializar con un valor predeterminado
+			try
+			{
+				if (comboBoxEstadoControlado.Text.Contains("i"))
+				{
+					Referencia = float.Parse(textBoxref.Text) / 1000;
+					labelUnidades.Text = "[mA]";
+				}
+				else if (comboBoxEstadoControlado.Text.Contains("V"))
+				{
+					Referencia = float.Parse(textBoxref.Text);
+					labelUnidades.Text = "[V]";
+				}
+				else
+				{
+					Referencia = 0;
+					labelUnidades.Text = "...";
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				Referencia = 0;
+			}
+
+			return Referencia;
+		}
+
 	}
 }

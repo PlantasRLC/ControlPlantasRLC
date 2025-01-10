@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AppControl
 {
@@ -31,9 +32,10 @@ namespace AppControl
 		public bool comunicacionActiva = false;
 		public async void buttonLeer_Click(object sender, EventArgs e)
 		{
+			CambioTextoGraficas();
 			try
 			{
-				
+
 				// Verificar si la comunicación está activa
 				if (!comunicacionActiva)
 				{
@@ -80,7 +82,7 @@ namespace AppControl
 											{
 												case "Vestado0":
 													chart1.Invoke((MethodInvoker)(() => chart1.Series["Analog0"].Points.AddY(floatValue)));
-													chart1.Invoke((MethodInvoker)(() => chart1.Series["Ref"].Points.AddY(_configuracionForm.referencia)));
+													chart1.Invoke((MethodInvoker)(() => chart1.Series["Ref"].Points.AddY(_configuracionForm.referenciaCHART)));
 													if (chart1.Series["Analog0"].Points.Count > 1000)
 													{
 														chart1.Invoke((MethodInvoker)(() => chart1.Series["Analog0"].Points.Clear()));
@@ -117,7 +119,9 @@ namespace AppControl
 													chart1.Invoke((MethodInvoker)(() => MessageBox.Show("ID no reconocido: " + id)));
 													break;
 											}
-											//Control();
+											UltimoValorGraficas();
+
+
 										}
 										else
 										{
@@ -167,7 +171,7 @@ namespace AppControl
 				chart1.Invoke((MethodInvoker)(() => chart4.Series["Analog3"].Points.Clear()));
 				chart1.Invoke((MethodInvoker)(() => chart1.Series["Ref"].Points.Clear()));
 				comunicacionActiva = true;
-				
+
 			}
 			catch (Exception ex)
 			{
@@ -194,6 +198,340 @@ namespace AppControl
 			}
 		}
 
+		private void CambioTextoGraficas()
+		{
+			try {
+				// Obtener el valor seleccionado del ComboBox SeleccionCircuito y EstadoControlado
+				string seleccion = _configuracionForm.comboBoxSeleccionCircuito.SelectedItem.ToString();
+				string estadoControlado = _configuracionForm.comboBoxEstadoControlado.SelectedItem.ToString();
+
+				switch (seleccion)
+				{
+					case "Seleccione":
+
+						break;
+
+					case "CIRCUITO I-V":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "iL2 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "iL2":
+								labelChart1.Text = "iL2 [mA]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO I-VI":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO I-VII":
+
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "iL2 [mA]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "iL2":
+								labelChart1.Text = "iL2 [mA]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "iL2 [mA]";
+								labelChart4.Text = "u [V]";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO II-V":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO II-VI":
+						switch (estadoControlado)
+						{
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "Vc2 [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "Vc2":
+								labelChart1.Text = "Vc2 [V]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO II-VII":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc2 [V]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "Vc2 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc2":
+								labelChart1.Text = "Vc2 [V]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "iL1 [mA]";
+								labelChart4.Text = "u [V]";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO III-V":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO III-VI":
+
+
+						break;
+
+					case "CIRCUITO III-VII":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc2 [V]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "Vc2 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc2":
+								labelChart1.Text = "Vc2 [V]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "iL1 [mA]";
+								labelChart4.Text = "u [V]";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO IV-V":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "iL2 [mA]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "iL2":
+								labelChart1.Text = "iL2 [mA]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "u [V]";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL2 [mA]";
+								labelChart3.Text = "iL1 [mA]";
+								labelChart4.Text = "u [V]";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO IV-VI":
+
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vceq [V]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+
+							case "Vceq":
+								labelChart1.Text = "Vceq [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "u [V]";
+								labelChart4.Text = "N/A";
+								break;
+						}
+
+						break;
+
+					case "CIRCUITO IV-VII":
+						switch (estadoControlado)
+						{
+							case "iL1":
+								labelChart1.Text = "iL1 [mA]";
+								labelChart2.Text = "Vc1 [V]";
+								labelChart3.Text = "iL2 [mA]";
+								labelChart4.Text = "Vc2 [V]";
+								break;
+
+							case "iL2":
+								labelChart1.Text = "iL2 [mA]";
+								labelChart2.Text = "Vc2 [V]";
+								labelChart3.Text = "iL1 [mA]";
+								labelChart4.Text = "Vc1 [V]";
+								break;
+
+							case "Vc1":
+								labelChart1.Text = "Vc1 [V]";
+								labelChart2.Text = "iL2 [mA]";
+								labelChart3.Text = "Vc2 [V]";
+								labelChart4.Text = "iL1 [mA]";
+								break;
+
+							case "Vc2":
+								labelChart1.Text = "Vc2 [V]";
+								labelChart2.Text = "iL1 [mA]";
+								labelChart3.Text = "Vc1 [V]";
+								labelChart4.Text = "iL2 [mA]";
+								break;
+						}
+
+						break;
+
+					default:
+
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
+		private void UltimoValorGraficas()
+		{
+			try
+			{
+				// Diccionario que asocia cada Label con su respectivo Chart y Serie
+				var chartLabelMapping = new Dictionary<Label, (Chart, string)>
+				{
+					{ labelValorChar1, (chart1, "Analog0") },
+					{ labelValorChar2, (chart2, "Analog1") },
+					{ labelValorChar3, (chart3, "Analog2") },
+					{ labelValorChar4, (chart4, "Analog3") }
+				};
+
+				foreach (var mapping in chartLabelMapping)
+				{
+					Label label = mapping.Key;
+					Chart chart = mapping.Value.Item1;
+					string seriesName = mapping.Value.Item2;
+
+					string ultimoValor = (string)chart.Invoke((Func<string>)(() =>
+					{
+						var series = chart.Series[seriesName];
+						if (series != null && series.Points.Count > 0)
+						{
+							// Formatear el valor a 4 decimales
+							return series.Points.Last().YValues[0].ToString("F4");
+						}
+						else
+						{
+							return "No data"; // Mensaje en caso de que no haya datos
+						}
+					}));
+
+					// Asegurarse de que el Label se actualice en el hilo de la UI
+					label.Invoke((MethodInvoker)(() => label.Text = ultimoValor));
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
 
 
 	}
